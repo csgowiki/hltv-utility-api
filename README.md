@@ -26,6 +26,7 @@ Install [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang)
 `go get -u github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs`
 
 > If your network is in CN, you may change Golang's proxy
+>
 > `go env -w GOPROXY=https://goproxy.cn,direct`
 
 
