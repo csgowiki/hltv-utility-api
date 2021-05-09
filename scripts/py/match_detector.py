@@ -54,4 +54,4 @@ class API_Task:
     def start(self):
         all_results = self.request_recent_results()
         # temp
-        self.dump_api('getMatches.html', all_results)
+        self.dump_api('getMatches.json', all_results)
