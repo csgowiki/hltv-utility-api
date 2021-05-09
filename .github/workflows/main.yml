@@ -39,9 +39,17 @@ jobs:
       # execute command
       - name: Run script
         run: python3 run.py
-      
+    
+      # commit changes
+      - name: Commit Changes
+        run: |
+          git config --local user.email "herixth@163.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "edit: rebuild apis"
+          
       # push
       - name: Build API
-        uses: ad-m/github-push-actiuon@v0.6.0
+        uses: ad-m/github-push-action@master
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
