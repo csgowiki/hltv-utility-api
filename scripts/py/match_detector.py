@@ -8,6 +8,7 @@ import yaml
 import ujson
 
 from scripts.py.logger import parser_logger
+from scripts.py.downloader import Downloader
 
 
 class API_Task:
@@ -25,7 +26,6 @@ class API_Task:
         )
         return localtime.strftime("%Y-%m-%d %H:%M:%S")
 
-    @parser_logger('request all recent results')
     def request_recent_results(self) -> List:
         _url = self._config['hltv-api'] + '/api/results'
         resp = requests.get(_url)
@@ -46,12 +46,18 @@ class API_Task:
 
         return all_results
 
-    @parser_logger('dump api values')
     def dump_api(self, api_name: str, json_obj: Union[Dict, List]):
         with open(os.path.join('docs', api_name), 'w') as apifile:
             ujson.dump(json_obj, apifile)
 
+    @parser_logger('fetch and parse')
     def start(self):
         all_results = self.request_recent_results()
+
+        for result in all_results:
+            cDownloader = Downloader(result['matchId'], self._config)
+            cDownloader.start()
+            del result['matchId']
+
         # temp
         self.dump_api('getMatches.json', all_results)

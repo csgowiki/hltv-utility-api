@@ -13,6 +13,6 @@ def parser_logger(purpose: str):
                 return values
             except Exception as ept:
                 print(f'[ERROR] {purpose} | {ept} ({cT})')
-                raise False
+                raise ept
         return wrapper
     return decorator
