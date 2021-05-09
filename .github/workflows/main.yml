@@ -37,5 +37,11 @@ jobs:
         run: pip3 install -r requirements.txt
 
       # execute command
-      - name: start script
+      - name: Run script
         run: python3 run.py
+      
+      # push
+      - name: Build API
+        uses: ad-m/github-push-actiuon@v0.6.0
+        with:
+          branch: master
