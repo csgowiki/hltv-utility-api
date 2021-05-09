@@ -4,8 +4,7 @@ from scripts.py.match_detector import API_Task
 
 def start():
     task = API_Task()
-    print(task.get_config())
-
+    task.start()
 
 if __name__ == '__main__':
     start()

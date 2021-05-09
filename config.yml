@@ -1,3 +1,23 @@
+# DO NOT **delete** OR **modify** any keys
+# JUST **change** values in condition
+# Service will be crashed if some keys missing
+
 # build from [https://github.com/dajk/hltv-api]
 hltv-api: https://hltv-api.vercel.app
 
+# if enable localtime format or enable utc format
+time_format:
+  localtime: true
+  time_delta: +8    # UTC+8:00 for Peking
+
+# filter match records as your wish
+match_filter:
+  enable: true
+  # only these teams match will be parsed
+  # FULL TEAM NAME NEEDED
+  team_whitelist: [
+    "Astralis", "Natus Vincere", "Vitality", "BIG", "Liquid",
+    "Virtus.pro", "Heroic", "mousesports", "FURIA", "fnatic",
+    "G2", "OG", "Spirit", "Complexity", "Gambit", "Evil Geniuses",
+    "FunPlus Phoenix", "NIP", "FaZe", "Cloud9", "MIBR"
+  ]
