@@ -3,7 +3,7 @@ import requests
 
 
 def main():
-    url = 'https://hx-w.github.io/hltv-utility-api/getMatches'
+    url = 'https://hx-w.github.io/hltv-utility-api/getMatches.json'
     resp = requests.get(url)
     print(resp.content.decode('utf-8'))
 
