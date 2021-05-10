@@ -6,9 +6,11 @@ from typing import Union, Dict, List
 import requests
 import yaml
 import ujson
+from tqdm import tqdm
 
 from scripts.py.logger import parser_logger
 from scripts.py.downloader import Downloader
+from scripts.py.parser import DemoParser
 
 
 class API_Task:
@@ -61,14 +63,15 @@ class API_Task:
         os.mkdir(demodir)
 
 
-#        for result in all_results:
-#            cDownloader = Downloader(result['matchId'], self._config)
-#            cDownloader.start()
-#            del result['matchId']
-        cD = Downloader(all_results[0]['matchId'], self._config)
-        cD.start()
+        for result in tqdm(all_results):
+            cDownloader = Downloader(result['matchId'])
+            # cDownloader.run()
+            cParser = DemoParser(result['matchId'])
+            # cParser.parse()
+
+            del result['matchId']
 
         # delete dir 'demofiles'
-        shutils.rmtree(demodir, ignore_errors=True)
+        shutil.rmtree(demodir, ignore_errors=True)
         # temp
-        self.dump_api('getMatches.json', all_results)
+        self.dump_api('getMatches.md', all_results)
