@@ -2,6 +2,7 @@
 
 import requests
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 
 from scripts.py.logger import parser_logger
 
@@ -33,7 +34,26 @@ class Downloader():
         assert len(links) > 0, f'demoId not found by {self._matchId_short}'
         self._demoId = links[0]['href']
 
+    def download(self) -> bool:
+        url = f"https://hltv.org{self._demoId}"
+        resp = requests.get(url, headers=self._headers, stream=True)
+        if resp.status_code != requests.codes.ok:
+            return False
+
+        file_size_bytes = float(resp.headers['Content-Length'])
+        rar_path = os.path.join("demofiles", f"{self._matchId_short}.rar")
+        print(f"[INFO] <{rar_path}> {file_size_bytes}bytes")
+        with open(rar_path, 'ab') as demoFile:
+            for chunk in tqdm(resp.iter_content(chunk_size=1024)):
+                if not chunk:
+                    continue
+                demoFile.write(chunk)
+                demoFile.flush()
+        return True
+
     @parser_logger('fetch demoId and downloading')
     def start(self):
         self.get_demoId()
         print(f'MatchId: {self._matchId_short}, DemoId: {self._demoId}')
+        if self.download():
+            pass

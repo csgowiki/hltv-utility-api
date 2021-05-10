@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os
+import os, shutil
 import datetime
 from typing import Union, Dict, List
 
@@ -37,7 +37,7 @@ class API_Task:
                 lambda result: result['team1']['name'] in team_whitelist or
                 result['team2']['name'] in team_whitelist,
                 all_results
-            ))
+            ))[0: int(self._config['match_filter']['match_max_count'])]
         # time format change
         if self._config['time_format']['localtime']:
             for result in all_results:
@@ -54,10 +54,21 @@ class API_Task:
     def start(self):
         all_results = self.request_recent_results()
 
-        for result in all_results:
-            cDownloader = Downloader(result['matchId'], self._config)
-            cDownloader.start()
-            del result['matchId']
+        # create dir 'demofiles'
+        demodir = 'demofiles'
+        if os.path.exists(demodir):
+            shutil.rmtree(demodir, ignore_errors=True)
+        os.mkdir(demodir)
 
+
+#        for result in all_results:
+#            cDownloader = Downloader(result['matchId'], self._config)
+#            cDownloader.start()
+#            del result['matchId']
+        cD = Downloader(all_results[0]['matchId'], self._config)
+        cD.start()
+
+        # delete dir 'demofiles'
+        shutils.rmtree(demodir, ignore_errors=True)
         # temp
         self.dump_api('getMatches.json', all_results)
