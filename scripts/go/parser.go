@@ -155,7 +155,6 @@ func main() {
 		uId := int64(e.Projectile.WeaponInstance.UniqueID())
 		_, ok := utrecord_collector[uId]
 		if !ok {
-			fmt.Println(e.Projectile.Trajectory)
 			utrecord_collector[int64(e.Projectile.WeaponInstance.UniqueID())] = UtilityRecord{
 				player_name:      string(e.Projectile.Thrower.Name),
 				steamid:          uint64(e.Projectile.Thrower.SteamID64),

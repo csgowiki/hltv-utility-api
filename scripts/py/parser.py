@@ -19,7 +19,7 @@ class DemoParser():
             if not demofile.endswith(".dem"):
                 continue
             demo_path = os.path.join(demo_dir, demofile)
-            os.system(f"go run {self._parser_path} --filepath '{demo_path}' --tofile temp.json")
+            os.system(f"go run {self._parser_path} -filepath '{demo_path}' -topath 'temp.json'")
             os.remove(demo_path)
             with open("temp.json", "r") as infile:
                 parsed_json = ujson.load(infile)[1:]
