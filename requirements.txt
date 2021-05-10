@@ -3,3 +3,4 @@ pyyaml
 ujson
 bs4
 lxml
+tqdm
