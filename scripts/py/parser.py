@@ -9,7 +9,7 @@ from scripts.py.logger import parser_logger
 
 class DemoParser():
     def __init__(self, result: dict):
-        self._matchId_short = result['matchId'].split('/')[:-2]
+        self._matchId_short = result['matchId'].split('/')[-2]
         self._parser_path = "scripts/go/parser.go"
 
     @parser_logger('parse demofile')
