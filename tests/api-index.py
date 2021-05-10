@@ -4,7 +4,7 @@ import requests
 
 
 def main():
-    url = 'https://api.hx-w.top/de_dust2'
+    url = 'https://api.hx-w.top/de_inferno/101'
     resp = requests.get(url).content.decode('utf-8')
     print('size:', len(resp))
     print(resp)

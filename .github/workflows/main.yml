@@ -5,8 +5,8 @@ name: AutoParser
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  # push:
-  #  branches: [ master ]
+  push:
+    branches: [ master ]
   workflow_dispatch:
   schedule:
     # Peking 8:30 update
@@ -59,4 +59,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
+          branch: api-page
