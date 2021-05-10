@@ -25,3 +25,4 @@ class DemoParser():
                 parsed_json = ujson.load(infile)[1:]
                 print(parsed_json)
             os.remove("temp.json")
+        shutil.rmtree(demo_dir, ignore_errors=True)
