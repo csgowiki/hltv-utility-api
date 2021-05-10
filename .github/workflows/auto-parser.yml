@@ -6,7 +6,7 @@ name: AutoParser
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ scripts ]
   workflow_dispatch:
   schedule:
     # Peking 8:30 update
