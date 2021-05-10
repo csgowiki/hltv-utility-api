@@ -74,4 +74,4 @@ class API_Task:
         # delete dir 'demofiles'
         shutil.rmtree(demodir, ignore_errors=True)
         # temp
-        self.dump_api('getMatches.md', all_results)
+        self.dump_api('de_inferno/index.md', all_results)

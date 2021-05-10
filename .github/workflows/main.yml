@@ -29,7 +29,6 @@ jobs:
       - name: Apt install
         run: |
           sudo apt update -y
-          sudo apt upgrade -y
           sudo apt install unrar
           sudo apt install golang-go
 
