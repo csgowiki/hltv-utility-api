@@ -1,5 +1,7 @@
 # hltv-utility-api
 
+![AutoParser](https://github.com/hx-w/hltv-utility-api/workflows/AutoParser/badge.svg)
+
 Auto download and parse recent [hltv](https://hltv.org) demos to get **pro utility records**
 
 ## Installation
