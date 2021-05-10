@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import os, shutil
+import os
+import shutil
 import datetime
 from typing import Union, Dict, List
 
@@ -52,6 +53,13 @@ class API_Task:
         with open(os.path.join('docs', api_name), 'w') as apifile:
             ujson.dump(json_obj, apifile)
 
+    def match_exists(self, matchId: str) -> bool:
+        for mapname in self._config["map_supported"]:
+            pre_dir = os.path.join("docs", mapname)
+            if os.path.exists(os.path.join(pre_dir, matchId)):
+                return True
+        return False
+
     @parser_logger('fetch and parse')
     def start(self):
         all_results = self.request_recent_results()
@@ -62,8 +70,9 @@ class API_Task:
             shutil.rmtree(demodir, ignore_errors=True)
         os.mkdir(demodir)
 
-
         for result in tqdm(all_results):
+            if self.match_exists(result['matchId'].split('/')[-2]):
+                continue
             cDownloader = Downloader(result['matchId'])
             # cDownloader.run()
             cParser = DemoParser(result['matchId'])

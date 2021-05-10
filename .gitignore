@@ -1,6 +1,7 @@
 *.dem
 static/
 demofiles/
+docs
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
