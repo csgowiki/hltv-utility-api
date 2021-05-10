@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import shutil
 
 import requests
 from bs4 import BeautifulSoup
@@ -9,8 +10,8 @@ from scripts.py.logger import parser_logger
 
 
 class Downloader():
-    def __init__(self, matchId_long: str):
-        self._matchId_long = matchId_long
+    def __init__(self, result: dict):
+        self._matchId_long = result['matchId']
         self._headers = {
             'User-Agent': (
                 'Mozilla/5.0 '

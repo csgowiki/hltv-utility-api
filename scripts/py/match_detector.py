@@ -73,14 +73,14 @@ class API_Task:
         for result in tqdm(all_results):
             if self.match_exists(result['matchId'].split('/')[-2]):
                 continue
-            cDownloader = Downloader(result['matchId'])
-            # cDownloader.run()
-            cParser = DemoParser(result['matchId'])
-            # cParser.parse()
+            cDownloader = Downloader(result)
+            cDownloader.run()
+            cParser = DemoParser(result)
+            cParser.parse()
 
             del result['matchId']
 
         # delete dir 'demofiles'
         shutil.rmtree(demodir, ignore_errors=True)
         # temp
-        self.dump_api('de_inferno/index.json', all_results)
+        self.dump_api('index.json', all_results)
