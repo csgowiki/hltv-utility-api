@@ -22,3 +22,8 @@ match_filter:
     "FunPlus Phoenix", "NIP", "FaZe", "Cloud9", "MIBR"
   ]
   match_max_count: 5
+
+map_support: [
+  "de_inferno", "de_nuke", "de_train", "de_vertigo",
+  "de_mirage", "de_overpass", "de_ancient", "de_dust2"
+]

@@ -54,7 +54,7 @@ class API_Task:
             ujson.dump(json_obj, apifile)
 
     def match_exists(self, matchId: str) -> bool:
-        for mapname in self._config["map_supported"]:
+        for mapname in self._config["map_support"]:
             pre_dir = os.path.join("docs", mapname)
             if os.path.exists(os.path.join(pre_dir, matchId)):
                 return True
