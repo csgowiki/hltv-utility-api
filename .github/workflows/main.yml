@@ -7,7 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
-  gollum:
   workflow_dispatch:
   schedule:
     # Peking 8:30 update
@@ -25,6 +24,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout actuions
         uses: actions/checkout@v2
+
+      # Setup ubuntu env
+      - name: Apt install
+        run: |
+          sudo apt update -y
+          sudo apt upgrade -y
+          sudo apt install unrar
+          sudo apt install golang-go
 
       # Setup python version
       - name: Setup Python 3.8.5
