@@ -24,6 +24,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout actions
         uses: actions/checkout@v2
+        with:
+          ref: api-page
 
       # Setup ubuntu env
       - name: Apt install
@@ -60,4 +62,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force: true
-          branch: [api-page, scripts]
+          branch: api-page
