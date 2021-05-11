@@ -37,3 +37,4 @@ Install [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang)
 
 1. `/<str: mapname>`  Get match infomation
 2. `/<str: mapname>/<str: matchId>` Get utility data by matchId
+
