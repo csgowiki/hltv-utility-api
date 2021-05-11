@@ -49,10 +49,6 @@ class API_Task:
 
         return all_results
 
-    def dump_api(self, api_name: str, json_obj: Union[Dict, List]):
-        with open(os.path.join('docs', api_name), 'w') as apifile:
-            ujson.dump(json_obj, apifile)
-
     def match_exists(self, matchId: str) -> bool:
         for mapname in self._config["map_support"]:
             pre_dir = os.path.join("docs", mapname)
@@ -75,12 +71,10 @@ class API_Task:
                 continue
             cDownloader = Downloader(result)
             cDownloader.run()
-            cParser = DemoParser(result)
+            cParser = DemoParser(result, self._config)
             cParser.parse()
 
             del result['matchId']
 
         # delete dir 'demofiles'
         shutil.rmtree(demodir, ignore_errors=True)
-        # temp
-        self.dump_api('index.json', all_results)

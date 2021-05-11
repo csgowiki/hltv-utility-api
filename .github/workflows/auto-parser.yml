@@ -60,4 +60,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force: true
-          branch: api-page
+          branch: [api-page, scripts]
