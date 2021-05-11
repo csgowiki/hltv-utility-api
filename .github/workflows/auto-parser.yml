@@ -26,6 +26,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: api-page
+      
+      - name: Merge scripts
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          from_branch: scripts
+          target_branch: api-page
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       # Setup ubuntu env
       - name: Apt install
