@@ -21,7 +21,7 @@ class DemoParser():
     def dump_api(self, filepath: str, json_obj: Union[Dict, List]):
         with open(filepath, 'w') as apifile:
             ujson.dump(json_obj, apifile)
-    
+
     def load_api(self, filepath: str) -> dict:
         with open(filepath, 'r') as apifile:
             return ujson.load(apifile)
@@ -34,7 +34,6 @@ class DemoParser():
                 continue
             # get mapname
             mapname = "de_" + demofile.split('-')[-1][:-4]
-            print('mapname: ', mapname)
             if mapname not in self._config['map_support']:
                 continue
             demo_path = os.path.join(demo_dir, demofile)
