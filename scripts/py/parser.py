@@ -33,7 +33,8 @@ class DemoParser():
             if not demofile.endswith(".dem"):
                 continue
             # get mapname
-            mapname = demofile.split('-')[-1][:-4]
+            mapname = "de_" + demofile.split('-')[-1][:-4]
+            print('mapname: ', mapname)
             if mapname not in self._config['map_support']:
                 continue
             demo_path = os.path.join(demo_dir, demofile)
