@@ -35,8 +35,5 @@ Install [demoinfocs-golang](https://github.com/markus-wa/demoinfocs-golang)
 
 ## Methods
 
-1. `/getMatches.json`
-2. `/getUtilityListByMatchId/<str: matchId>.json`
-3. `/getUtilityRecordByUtilityId/<str: UtilityId>.json`
-
-[TODO]
+1. `/<str: mapname>`  Get match infomation
+2. `/<str: mapname>/<str: matchId>` Get utility data by matchId
