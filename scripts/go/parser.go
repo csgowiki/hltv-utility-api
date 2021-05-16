@@ -7,6 +7,7 @@ import (
 	"io"
 	"os"
 	"time"
+	"strconv"
 
 	dem "github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs"
 	events "github.com/markus-wa/demoinfocs-golang/v2/pkg/demoinfocs/events"
@@ -21,6 +22,9 @@ type UtilityRecord struct {
 	throw_posX       float32
 	throw_posY       float32
 	throw_posZ       float32
+  	velocity_x       float32
+ 	velocity_y       float32
+  	velocity_z       float32
 	end_posX         float32
 	end_posY         float32
 	end_posZ         float32
@@ -46,33 +50,35 @@ func ArgParser() {
 	flag.Parse()
 }
 
-func JsonFomat(ut UtilityRecord, round int) string {
-	json_map := map[string]interface{}{
-		"aim_pitch":        ut.throw_pitch,
-		"aim_yaw":          ut.throw_yaw,
-		"throw_x":          ut.throw_posX,
-		"throw_y":          ut.throw_posY,
-		"throw_z":          ut.throw_posZ,
-		"end_x":            ut.end_posX,
-		"end_y":            ut.end_posY,
-		"end_z":            ut.end_posZ,
-		"is_walk":          ut.is_walk,
-		"is_jump":          ut.is_jump,
-		"is_duck":          ut.is_duck,
-		"is_left":          true,
-		"is_right":         false,
-		"map_belong":       mapName,
-		"air_time":         ut.air_time,
-		"match_round":      round,
-		"steamid":          ut.steamid,
-		"nickname":         ut.player_name,
-		"tickrate":         tickRate,
-		"utility_type":     type_map[ut.utType],
-		"match_throw_time": ut.match_throw_time,
-		"teamname":         ut.teamname,
-	}
+func f2str(input_num float32) string {
+	return strconv.FormatFloat(float64(input_num), 'f', 6, 64)
+}
 
-	str, err := json.Marshal(json_map)
+func JsonFomat(ut UtilityRecord, round int) string {
+	var json_list = []string {
+		f2str(ut.throw_pitch),
+		f2str(ut.throw_yaw),
+		f2str(ut.air_time),
+		f2str(ut.end_posX),
+		f2str(ut.end_posY),
+		f2str(ut.end_posZ),
+		strconv.FormatBool(ut.is_duck),
+		strconv.FormatBool(ut.is_jump),
+		strconv.FormatBool(ut.is_walk),
+		strconv.Itoa(round),
+		f2str(ut.match_throw_time),
+		ut.player_name,
+		strconv.FormatUint(ut.steamid, 10),
+		ut.teamname,
+		f2str(ut.throw_posX),
+		f2str(ut.throw_posY),
+		f2str(ut.throw_posZ),
+		type_map[ut.utType],
+		f2str(ut.velocity_x),
+		f2str(ut.velocity_y),
+		f2str(ut.velocity_z),
+	}
+	str, err := json.Marshal(json_list)
 	if err != nil {
 		panic(err)
 	}
@@ -126,13 +132,13 @@ func main() {
 	defer infoFile.Close()
 
 	// init
-	infoFile.WriteString("[{}")
+	infoFile.WriteString("[[]")
 
 	type_map = make(map[string]string)
-	type_map["Smoke Grenade"] = "smoke"
-	type_map["HE Grenade"] = "grenade"
-	type_map["Flashbang"] = "flash"
-	type_map["Incendiary Grenade"] = "molotov"
+	type_map["Smoke Grenade"] = "smokegrenade"
+	type_map["HE Grenade"] = "hegrenade"
+	type_map["Flashbang"] = "flashbang"
+	type_map["Incendiary Grenade"] = "incgrenade"
 	type_map["Molotov"] = "molotov"
 
 	utrecord_collector = make(map[int64]UtilityRecord)
@@ -163,6 +169,9 @@ func main() {
 				throw_posX:       float32(e.Projectile.Thrower.LastAlivePosition.X),
 				throw_posY:       float32(e.Projectile.Thrower.LastAlivePosition.Y),
 				throw_posZ:       float32(e.Projectile.Thrower.LastAlivePosition.Z),
+       			velocity_x:       float32(e.Projectile.Velocity().X),
+        		velocity_y:       float32(e.Projectile.Velocity().Y),
+        		velocity_z:       float32(e.Projectile.Velocity().Z),
 				utType:           string(e.Projectile.WeaponInstance.String()),
 				round:            int(round),
 				valid:            false,
@@ -185,7 +194,6 @@ func main() {
 			utrecord.end_posX = float32(e.Position.X)
 			utrecord.end_posY = float32(e.Position.Y)
 			utrecord.end_posZ = float32(e.Position.Z)
-
 			end_time := p.CurrentTime()
 			utrecord.air_time = float32((end_time - utrecord.start_time).Seconds())
 			count++
