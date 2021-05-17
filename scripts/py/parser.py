@@ -32,9 +32,9 @@ class DemoParser():
         bool_index = [6, 7, 8]
         for item_idx in range(len(pjson)):
             for float_ in float_index:
-                pjson[item_idx] = float(json[item_idx])
+                pjson[item_idx] = float(pjson[item_idx])
             for int_ in int_index:
-                pjson[item_idx] = int(json[item_idx])
+                pjson[item_idx] = int(pjson[item_idx])
         return pjson
 
 
