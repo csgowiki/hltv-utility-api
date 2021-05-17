@@ -44,6 +44,7 @@ class API_Task:
         # time format change
         if self._config['time_format']['localtime']:
             for result in all_results:
+                del result['maps']
                 result['time'] = self.__convert_timeformat(result['time'])
                 del result['team1']['crest'], result['team2']['crest']
 
@@ -73,8 +74,6 @@ class API_Task:
             cDownloader.run()
             cParser = DemoParser(result, self._config)
             cParser.parse()
-
-            del result['matchId']
 
         # delete dir 'demofiles'
         shutil.rmtree(demodir, ignore_errors=True)

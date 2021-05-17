@@ -49,7 +49,7 @@ GET: `/<mapname>`
 [
   {
     "event": "Flashpoint 3",
-    "maps": "bo3",
+    "maxround": "26",
     "time": "2021-05-11 05:51:51",
     "team1": { "name": "Astralis", "result": 2 },
     "team2": { "name": "OG", "result": 0 },

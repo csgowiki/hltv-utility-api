@@ -48,10 +48,6 @@ class DemoParser():
                 parsed_json = ujson.load(infile)[1:]
             os.remove("temp.json")
 
-            res_json = {
-                'header': self._header,
-                'body': parsed_json
-            }
             pre_dir = os.path.join('docs', mapname)
             final_dir = os.path.join(pre_dir, self._matchId_short)
             if os.path.exists(final_dir):
@@ -59,9 +55,24 @@ class DemoParser():
             os.mkdir(final_dir)
             # dump
             restored_json = self.load_api(os.path.join(pre_dir, 'index.json'))
+            self._header['maxround'] = int(parsed_json[-1][9])
             restored_json.append(self._header)
             self.dump_api(os.path.join(pre_dir, 'index.json'), restored_json)
             self.dump_api(os.path.join(final_dir, 'index.json'), parsed_json)
 
+            round_map = []
+            for item in parsed_json:
+                cround = int(item[9])
+                if len(round_map) < cround:
+                    round_map.append([item])
+                else:
+                    round_map[cround - 1].append(item)
+
+            for round_int in range(0, self._header['maxround']):
+                round_dir = os.path.join(final_dir, f'round{round_int + 1}')
+                if os.path.exists(round_dir):
+                    shutil.rmtree(round_dir)
+                os.mkdir(round_dir)
+                self.dump_api(os.path.join(round_dir, 'index.json'), round_map[round_int])
 
         shutil.rmtree(demo_dir, ignore_errors=True)
