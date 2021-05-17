@@ -26,6 +26,17 @@ class DemoParser():
         with open(filepath, 'r') as apifile:
             return ujson.load(apifile)
 
+    def json_fix(self, json: list) -> list:
+        float_index = [0, 1, 2, 3, 4, 5, 10, 14, 15, 16, 18, 19, 20]
+        int_index = [9]
+        bool_index = [6, 7, 8]
+        for item_idx in len(json):
+            for float_ in float_index:
+                json[item_idx] = float(json[item_idx])
+            for int_ in int_index:
+                json[item_idx] = int(json[item_idx])
+
+
     @parser_logger('parse demofile')
     def parse(self):
         demo_dir = os.path.join("demofiles", self._matchId_short)
@@ -47,6 +58,7 @@ class DemoParser():
             with open("temp.json", "r") as infile:
                 parsed_json = ujson.load(infile)[1:]
             os.remove("temp.json")
+            parsed_json = self.json_fix(parsed_json)
 
             if len(parsed_json) == 0:
                 continue
