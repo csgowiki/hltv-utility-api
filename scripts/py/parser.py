@@ -26,15 +26,17 @@ class DemoParser():
         with open(filepath, 'r') as apifile:
             return ujson.load(apifile)
 
-    def json_fix(self, json: list) -> list:
+    def json_fix(self, pjson: list) -> list:
         float_index = [0, 1, 2, 3, 4, 5, 10, 14, 15, 16, 18, 19, 20]
         int_index = [9]
         bool_index = [6, 7, 8]
-        for item_idx in len(json):
+        print(pjson)
+        for item_idx in len(pjson):
             for float_ in float_index:
-                json[item_idx] = float(json[item_idx])
+                pjson[item_idx] = float(json[item_idx])
             for int_ in int_index:
-                json[item_idx] = int(json[item_idx])
+                pjson[item_idx] = int(json[item_idx])
+        return pjson
 
 
     @parser_logger('parse demofile')
