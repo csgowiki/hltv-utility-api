@@ -48,6 +48,8 @@ class DemoParser():
                 parsed_json = ujson.load(infile)[1:]
             os.remove("temp.json")
 
+            if len(parsed_json) == 0:
+                continue
             pre_dir = os.path.join('docs', mapname)
             final_dir = os.path.join(pre_dir, self._matchId_short)
             if os.path.exists(final_dir):
@@ -55,7 +57,6 @@ class DemoParser():
             os.mkdir(final_dir)
             # dump
             restored_json = self.load_api(os.path.join(pre_dir, 'index.json'))
-            print(parsed_json)
             self._header['maxround'] = int(parsed_json[-1][9])
             restored_json.append(self._header)
             self.dump_api(os.path.join(pre_dir, 'index.json'), restored_json)
