@@ -37,6 +37,9 @@ type UtilityRecord struct {
 	is_walk          bool
 	is_duck          bool
 	is_jump          bool
+	entity_posX		 float32
+	entity_posY		 float32
+	entity_posZ		 float32
 }
 
 var utrecord_collector map[int64]UtilityRecord
@@ -77,6 +80,9 @@ func JsonFomat(ut UtilityRecord, round int) string {
 		f2str(ut.velocity_x),
 		f2str(ut.velocity_y),
 		f2str(ut.velocity_z),
+		f2str(ut.entity_posX),
+		f2str(ut.entity_posY),
+		f2str(ut.entity_posZ),
 	}
 	str, err := json.Marshal(json_list)
 	if err != nil {
@@ -181,6 +187,12 @@ func main() {
 				is_walk:          e.Projectile.Thrower.IsWalking(),
 				is_jump:          e.Projectile.Thrower.IsAirborne(),
 				is_duck:          e.Projectile.Thrower.Flags().DuckingKeyPressed(),
+				entity_posX:	  float32(e.Projectile.Entity.Position().X),
+				entity_posY:	  float32(e.Projectile.Entity.Position().Y),
+				entity_posZ:	  float32(e.Projectile.Entity.Position().Z),
+				// entity_posX:	  float32(e.Projectile.Trajectory[0].X),
+				// entity_posY:	  float32(e.Projectile.Trajectory[0].Y),
+				// entity_posZ:	  float32(e.Projectile.Trajectory[0].Z),
 			}
 		}
 	})

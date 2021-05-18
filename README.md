@@ -102,6 +102,9 @@ etc.
 | 18    | velocity_x       | float32 |
 | 19    | velocity_y       | float32 |
 | 20    | velocity_z       | float32 |
+| 21    | entity_x         | float32 |
+| 22    | entity_y         | float32 |
+| 23    | entity_z         | float32 |
 
 #### utility type enum
 

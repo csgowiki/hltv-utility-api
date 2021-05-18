@@ -27,9 +27,8 @@ class DemoParser():
             return ujson.load(apifile)
 
     def json_fix(self, pjson: list) -> list:
-        float_index = [0, 1, 2, 3, 4, 5, 10, 14, 15, 16, 18, 19, 20]
+        float_index = [0, 1, 2, 3, 4, 5, 10, 14, 15, 16, 18, 19, 20, 21, 22, 23]
         int_index = [9]
-        bool_index = [6, 7, 8]
         for item_idx in range(len(pjson)):
             for float_ in float_index:
                 pjson[item_idx][float_] = float(pjson[item_idx][float_])
