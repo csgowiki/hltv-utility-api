@@ -1,7 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
 name: AutoParser
-
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
@@ -25,28 +24,23 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout actions
         uses: actions/checkout@v2
-      
       # Setup ubuntu env
       - name: Apt install
         run: |
           sudo apt update -y
           sudo apt install unrar
           sudo apt install golang-go
-
       # Setup python version
       - name: Setup Python 3.8.5
         uses: actions/setup-python@v2.2.2
         with:
           python-version: 3.8.5
-      
       # Build python env
       - name: Build Python requirements
         run: pip3 install -r requirements.txt
-
       # execute command
       - name: Run script
         run: python3 run.py
-    
       # commit changes
       - name: Commit Changes
         run: |
@@ -54,7 +48,6 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add -A
           git commit -m "edit: rebuild apis" --allow-empty
-          
       # push
       - name: Build API
         uses: ad-m/github-push-action@master

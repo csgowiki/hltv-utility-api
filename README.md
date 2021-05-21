@@ -2,6 +2,7 @@
 
 ![AutoParser](https://github.com/hx-w/hltv-utility-api/workflows/AutoParser/badge.svg)
 ![CodeAnalysis](https://github.com/hx-w/hltv-utility-api/workflows/CodeAnalysis/badge.svg)
+[![CodeFactor](https://www.codefactor.io/repository/github/hx-w/hltv-utility-api/badge)](https://www.codefactor.io/repository/github/hx-w/hltv-utility-api)
 
 Auto download and parse recent [hltv](https://hltv.org) demos to get **pro utility records**
 

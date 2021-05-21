@@ -19,7 +19,7 @@ class API_Task:
     def __init__(self):
         self._config = {}
         with open('config.yml', 'r', encoding='utf-8') as cfile:
-            self._config = yaml.load(cfile.read(), Loader=yaml.FullLoader)
+            self._config = yaml.safe_load(cfile.read(), Loader=yaml.FullLoader)
 
     def __convert_timeformat(self, utcTime: str) -> str:
         utc_format = "%Y-%m-%dT%H:%M:%S.%fZ"
