@@ -69,7 +69,9 @@ class DemoParser():
             os.mkdir(final_dir)
             # dump
             restored_json = self.load_api(os.path.join(pre_dir, 'index.json'))
-            self._header['maxround'] = int(parsed_json[-1][9])
+            # find maxround
+            for s_json in parsed_json:
+                self._header['maxround'] = max(0, int(s_json[9]))
             restored_json.append(self._header)
             self.dump_api(os.path.join(pre_dir, 'index.json'), restored_json)
             self.dump_api(os.path.join(final_dir, 'index.json'), parsed_json)
