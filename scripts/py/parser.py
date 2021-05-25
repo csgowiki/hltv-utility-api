@@ -93,7 +93,7 @@ class DemoParser():
                 self.dump_api(os.path.join(round_dir, 'index.json'), round_map[round_int])
             # 
             restored_json.sort(key=lambda x: x['time'], reverse=True)
-            max_match_count = self._config['match_filter']['max_match_count']
+            max_match_count = self._config['match_filter']['match_max_count']
             for res in restored_json[max_match_count:]:
                 match_id = str(res['matchId'])
                 ignore_dir = os.path.join(pre_dir, match_id)
