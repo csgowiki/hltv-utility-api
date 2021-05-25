@@ -21,7 +21,7 @@ match_filter:
     "G2", "OG", "Spirit", "Complexity", "Gambit", "Evil Geniuses",
     "FunPlus Phoenix", "NIP", "FaZe", "Cloud9", "MIBR"
   ]
-  match_max_count: 5
+  match_max_count: 6
 
 map_support: [
   "de_inferno", "de_nuke", "de_train", "de_vertigo",

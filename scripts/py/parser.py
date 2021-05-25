@@ -22,7 +22,7 @@ class DemoParser():
         with open(filepath, 'w') as apifile:
             ujson.dump(json_obj, apifile)
 
-    def load_api(self, filepath: str) -> dict:
+    def load_api(self, filepath: str) -> list:
         with open(filepath, 'r') as apifile:
             return ujson.load(apifile)
 
@@ -73,6 +73,7 @@ class DemoParser():
             for s_json in parsed_json:
                 self._header['maxround'] = max(0, int(s_json[9]))
             restored_json.append(self._header)
+
             self.dump_api(os.path.join(pre_dir, 'index.json'), restored_json)
             self.dump_api(os.path.join(final_dir, 'index.json'), parsed_json)
 
@@ -90,5 +91,13 @@ class DemoParser():
                     shutil.rmtree(round_dir)
                 os.mkdir(round_dir)
                 self.dump_api(os.path.join(round_dir, 'index.json'), round_map[round_int])
+            # 
+            restored_json.sort(key=lambda x: x['time'], reverse=True)
+            max_match_count = self._config['match_filter']['max_match_count']
+            for res in restored_json[max_match_count:]:
+                match_id = str(res['matchId'])
+                ignore_dir = os.path.join(pre_dir, match_id)
+                shutil.rmtree(ignore_dir, ignore_errors=True)
+            self.dump_api(os.path.join(pre_dir, 'index.json'), restored_json[:max_match_count])
 
         shutil.rmtree(demo_dir, ignore_errors=True)
