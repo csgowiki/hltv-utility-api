@@ -19,7 +19,7 @@ match_filter:
     "Astralis", "Natus Vincere", "Vitality", "BIG", "Liquid",
     "Virtus.pro", "Heroic", "mousesports", "FURIA", "fnatic",
     "G2", "OG", "Spirit", "Complexity", "Gambit", "Evil Geniuses",
-    "FunPlus Phoenix", "NIP", "FaZe", "Cloud9", "MIBR"
+    "FunPlus Phoenix", "NIP", "FaZe", "Cloud9", "MIBR", "forZe", "SAW"
   ]
   match_max_count: 6
 
