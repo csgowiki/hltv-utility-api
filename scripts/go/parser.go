@@ -113,7 +113,7 @@ func main() {
 	p := dem.NewParser(f)
 	defer p.Close()
 
-	round := 1
+	round := 0
 	var round_start_time time.Duration
 
 	header, err := p.ParseHeader()
@@ -149,10 +149,10 @@ func main() {
 
 	utrecord_collector = make(map[int64]UtilityRecord)
 
-	p.RegisterEventHandler(func(e events.MatchStartedChanged) {
-		round = 1
-		round_start_time = p.CurrentTime()
-	})
+	// p.RegisterEventHandler(func(e events.MatchStartedChanged) {
+	// 	round = 1
+	// 	round_start_time = p.CurrentTime()
+	// })
 
 	p.RegisterEventHandler(func(e events.RoundStart) {
 		round++
@@ -190,9 +190,6 @@ func main() {
 				entity_posX:	  float32(e.Projectile.Entity.Position().X),
 				entity_posY:	  float32(e.Projectile.Entity.Position().Y),
 				entity_posZ:	  float32(e.Projectile.Entity.Position().Z),
-				// entity_posX:	  float32(e.Projectile.Trajectory[0].X),
-				// entity_posY:	  float32(e.Projectile.Trajectory[0].Y),
-				// entity_posZ:	  float32(e.Projectile.Trajectory[0].Z),
 			}
 		}
 	})
