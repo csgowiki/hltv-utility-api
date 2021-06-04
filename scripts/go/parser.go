@@ -149,10 +149,12 @@ func main() {
 
 	utrecord_collector = make(map[int64]UtilityRecord)
 
-	// p.RegisterEventHandler(func(e events.MatchStartedChanged) {
-	// 	round = 1
-	// 	round_start_time = p.CurrentTime()
-	// })
+	p.RegisterEventHandler(func(e events.MatchStartedChanged) {
+		if round == 0 {
+			round = 1
+		}
+		round_start_time = p.CurrentTime()
+	})
 
 	p.RegisterEventHandler(func(e events.RoundStart) {
 		round++
