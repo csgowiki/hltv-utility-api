@@ -81,6 +81,8 @@ class DemoParser():
             round_map = []
             for item in parsed_json:
                 cround = int(item[9])
+                if cround == 0:
+                    print(cround, ' round')
                 if len(round_map) < cround:
                     round_map.append([item])
                 else:
