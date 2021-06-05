@@ -30,7 +30,7 @@ class API_Task:
         return localtime.strftime("%Y-%m-%d %H:%M:%S")
 
     def request_recent_results(self) -> List:
-        _url = self._config['hltv-api'] + '/api/results.json'
+        _url = self._config['hltv-api'] + '/api/results'
         resp = requests.get(_url)
         all_results = ujson.loads(resp.content.decode('utf-8'))
         # match filter
