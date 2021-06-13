@@ -4,7 +4,7 @@
 
 # build from [https://github.com/dajk/hltv-api]
 # hltv-api: https://hltv-api.vercel.app
-hltv-api: https://hltv.hx-w.top
+hltv-api: https://selfhost-hltv-api.vercel.app/
 
 # if enable localtime format or enable utc format
 time_format:
