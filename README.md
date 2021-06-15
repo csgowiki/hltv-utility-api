@@ -38,6 +38,8 @@ GET: `/<mapname>`
 
 > get recent matches information index.
 
+**Request**
+
 - [x] [`/de_dust2`](https://api.hx-w.top/de_dust2)
 - [x] [`/de_mirage`](https://api.hx-w.top/de_mirage)
 - [x] [`/de_inferno`](https://api.hx-w.top/de_inferno)
@@ -46,6 +48,9 @@ GET: `/<mapname>`
 - [x] [`/de_nuke`](https://api.hx-w.top/de_nuke)
 - [x] [`/de_vertigo`](https://api.hx-w.top/de_vertigo)
 - [x] [`/de_ancient`](https://api.hx-w.top/de_ancient)
+
+
+**Response**
 
 ```json
 [
@@ -68,12 +73,15 @@ GET: `/<mapname>/<matchId>`
 
 etc.
 
+**Request**
+
 [`/de_inferno/2348420`](https://api.hx-w.top/de_inferno/2348420)
 
-```json
+**Response**
+
+```
 [
-    datapack,
-    datapack
+    <datapack>
 ]
 ```
 
@@ -115,3 +123,25 @@ etc.
 - `molotov`
 - `incgrenade`
 - `hegrenade`
+
+### Match Round Detail
+
+GET: `/<mapname>/<matchId>/round<roundNumber>`
+
+> Get match utility records' detail on specific round from `matchId`
+
+etc.
+
+**Request**
+
+[`/de_inferno/2349057/round15`](https://api.hx-w.top/de_inferno/2349057/round15)
+
+**Response**
+
+```
+[
+    <datapack>
+]
+```
+
+data format is same as previous.
