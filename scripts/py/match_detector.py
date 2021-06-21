@@ -46,7 +46,7 @@ class API_Task:
             for result in all_results:
                 del result['maps']
                 result['time'] = self.__convert_timeformat(result['time'])
-                del result['team1']['crest'], result['team2']['crest']
+                # del result['team1']['crest'], result['team2']['crest']
 
         return all_results
 
