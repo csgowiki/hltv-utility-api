@@ -31,7 +31,10 @@ class Downloader():
             lambda x: 'download/demo' in x['href'],
             soup.findAll('a')
         ))
-        assert len(links) > 0, f'demoId not found by {self._matchId_short}'
+        if len(links) <= 0:
+            print(f'demoId no found by {self._matchId_short}')
+            return False
+        # assert len(links) > 0, f'demoId not found by {self._matchId_short}'
         return links[0]['href']
 
     def download(self, demoId: str) -> bool:
@@ -62,6 +65,8 @@ class Downloader():
     @parser_logger('fetch demoId and downloading')
     def run(self):
         demoId = self.get_demoId()
+        if not demoId:
+            return
         print(f'MatchId: {self._matchId_short}, DemoId: {demoId}')
         if self.download(demoId):
             self.unrar()
