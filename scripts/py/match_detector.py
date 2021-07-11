@@ -71,7 +71,8 @@ class API_Task:
             if self.match_exists(result['matchId'].split('/')[-2]):
                 continue
             cDownloader = Downloader(result)
-            cDownloader.run()
+            if not cDownloader.run():
+                continue
             cParser = DemoParser(result, self._config)
             cParser.parse()
 

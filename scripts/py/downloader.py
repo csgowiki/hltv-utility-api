@@ -66,7 +66,8 @@ class Downloader():
     def run(self):
         demoId = self.get_demoId()
         if not demoId:
-            return
+            return False
         print(f'MatchId: {self._matchId_short}, DemoId: {demoId}')
         if self.download(demoId):
             self.unrar()
+        return True
